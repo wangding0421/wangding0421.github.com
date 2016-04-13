@@ -1,0 +1,631 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java,Tutorial,RMI,client-server," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Java RMIThe Java Remote Method Invocation (RMI) system allows an object running in one Java virtual machine to invoke methods on an object running in another Java virtual machine. RMI provides for rem">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RMI">
+<meta property="og:url" content="wangding0421.github.io/2016/04/12/RMI/index.html">
+<meta property="og:site_name" content="7d334507a8c41c33's Home">
+<meta property="og:description" content="Java RMIThe Java Remote Method Invocation (RMI) system allows an object running in one Java virtual machine to invoke methods on an object running in another Java virtual machine. RMI provides for rem">
+<meta property="og:image" content="https://docs.oracle.com/javase/tutorial/figures/rmi/rmi-2.gif">
+<meta property="og:image" content="https://docs.oracle.com/javase/tutorial/figures/rmi/rmi-3.gif">
+<meta property="og:image" content="https://docs.oracle.com/javase/tutorial/figures/rmi/rmi-4.gif">
+<meta property="og:image" content="https://docs.oracle.com/javase/tutorial/figures/rmi/rmi-5.gif">
+<meta property="og:updated_time" content="2016-04-13T03:16:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RMI">
+<meta name="twitter:description" content="Java RMIThe Java Remote Method Invocation (RMI) system allows an object running in one Java virtual machine to invoke methods on an object running in another Java virtual machine. RMI provides for rem">
+<meta name="twitter:image" content="https://docs.oracle.com/javase/tutorial/figures/rmi/rmi-2.gif">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> RMI | 7d334507a8c41c33's Home </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">7d334507a8c41c33's Home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                RMI
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-12T20:14:58-07:00" content="2016-04-12">
+              2016-04-12
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Java-RMI"><a href="#Java-RMI" class="headerlink" title="Java RMI"></a><a href="https://docs.oracle.com/javase/tutorial/rmi/" target="_blank" rel="external">Java RMI</a></h1><p>The Java Remote Method Invocation (RMI) system allows an object running in one Java virtual machine to invoke methods on an object running in another Java virtual machine. RMI provides for remote communication between programs written in the Java programming language.</p>
+<a id="more"></a>
+<p>RMI works, firstly, by exposing an object on one Java virtual machine as remotely-accessible, and secondly, by providing other virtual machines with a way to access this object. The remotely-accessible object can be thought of as a <em>server</em> in the abstract sense, since it provides some services through its remotely-accessible methods. Each Java virtual machine that accesses this object is then a <em>client</em>. Therefore, the RMI library has two major components: one that simplifies the task of making servers remotely-accessible, and another that simplifies the writing of the corresponding clients.</p>
+<p>Note that it is important not to think of the remotely-accessible object as a “server” in the low-level (socket programming-level) sense. Instead, a low-level TCP server is implemented in, and hidden by, the RMI library.</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p><strong>About Download:</strong> </p>
+<p>The client’s <code>Pi</code> class will be downloaded to the server at runtime. Also, the <code>Compute</code> and <code>Task</code> interfaces will be downloaded from the server to the registry at runtime.</p>
+<p><strong>Totally there are 3 packages:</strong></p>
+<ul>
+<li>compute – <code>Compute</code> and <code>Task</code> interfaces</li>
+<li>engine – <code>ComputeEngine</code> <code>implementation</code> class</li>
+<li>client – <code>ComputePi</code> client code and <code>Pi</code> task implementation</li>
+</ul>
+<h2 id="An-Overview-of-RMI-Applications"><a href="#An-Overview-of-RMI-Applications" class="headerlink" title="An Overview of RMI Applications"></a><a href="https://docs.oracle.com/javase/tutorial/rmi/overview.html" target="_blank" rel="external">An Overview of RMI Applications</a></h2><p>This part describes the RMI system and lists its advantages. Additionally, this section provides a description of a typical RMI application, composed of a server and a client, and introduces important terms.</p>
+<p>RMI applications often comprise two separate programs, a server and a client. A typical server program creates some remote objects, makes references to these objects accessible, and waits for clients to invoke methods on these objects. A typical client program obtains a remote reference to one or more remote objects on a server and then invokes methods on them.</p>
+<p>Three things to do:</p>
+<ul>
+<li>Locate remote objects.</li>
+<li>Communicate with remote objects.</li>
+<li>Load class definitions for objects that are passed around.</li>
+</ul>
+<p>The following image shows the routine of a RMI call:</p>
+<p><img src="https://docs.oracle.com/javase/tutorial/figures/rmi/rmi-2.gif" alt="RMI Procedure"> </p>
+<h3 id="Creating-Distributed-Applications-by-Using-RMI"><a href="#Creating-Distributed-Applications-by-Using-RMI" class="headerlink" title="Creating Distributed Applications by Using RMI"></a>Creating Distributed Applications by Using RMI</h3><p>Using RMI to develop a distributed application involves these general steps:</p>
+<ol>
+<li>Designing and implementing the components of your distributed application.</li>
+<li>Compiling sources.</li>
+<li>Making classes network accessible.</li>
+<li>Starting the application.</li>
+</ol>
+<h2 id="Writing-an-RMI-Server"><a href="#Writing-an-RMI-Server" class="headerlink" title="Writing an RMI Server"></a><a href="https://docs.oracle.com/javase/tutorial/rmi/server.html" target="_blank" rel="external">Writing an RMI Server</a></h2><p>The server code consists of an interface and a class. The interface defines the methods that can be invoked from the client. Essentially, the interface defines the client’s view of the remote object. The class provides the implementation. This is like the header file as well as the <code>.cpp</code> file in c++.</p>
+<h3 id="Designing-a-Remote-Interface"><a href="#Designing-a-Remote-Interface" class="headerlink" title="Designing a Remote Interface"></a><a href="https://docs.oracle.com/javase/tutorial/rmi/designing.html" target="_blank" rel="external">Designing a Remote Interface</a></h3><p>The remote communication for this protocol is illustrated in the following figure.</p>
+<p><img src="https://docs.oracle.com/javase/tutorial/figures/rmi/rmi-3.gif" alt="RMI communication"></p>
+<p>Each interface contains a single method. The compute engine’s remote interface, Compute, enables tasks to be submitted to the engine. The client interface, Task, defines how the compute engine executes a submitted task.</p>
+<p><strong>Server Side</strong></p>
+<ul>
+<li>The <a href="https://github.com/wangding0421/JavaTutorial/blob/master/RMI/Compute.java" target="_blank" rel="external"><code>compute.Compute</code></a> interface defines the remotely accessible part, the compute engine itself.</li>
+</ul>
+<p><strong>Client Side</strong></p>
+<ul>
+<li>The <a href="https://github.com/wangding0421/JavaTutorial/blob/master/RMI/Task.java" target="_blank" rel="external"><code>compute.Task</code></a> interface defines the interface between the compute engine and the work that it needs to do, providing the way to start the work. <strong>Note that here the type T is the return type of the computation</strong>. Classes that implement the Task interface must lmplement <strong>Serializable</strong>, as must the classes of objects used for task results so that the data can be transferred bewteen JVMs.</li>
+<li>Different kinds of tasks can be run by a Compute object as long as they are implementations of the Task type. The classes that implement this interface can contain any data needed for the computation of the task and any other methods needed for the computation.</li>
+</ul>
+<h3 id="Implementing-a-Remote-Interface"><a href="#Implementing-a-Remote-Interface" class="headerlink" title="Implementing a Remote Interface"></a><a href="https://docs.oracle.com/javase/tutorial/rmi/implementing.html" target="_blank" rel="external">Implementing a Remote Interface</a></h3><p>In general, a class that implements a remote interface should at least do the following:</p>
+<ul>
+<li>Declare the remote interfaces being implemented.</li>
+<li>Define the constructor for each remote object.</li>
+<li>Provide an implementation for each remote method in the remote interfaces.</li>
+</ul>
+<p>An RMI server program needs to create the initial remote objects and export them to the RMI runtime, which makes them available to receive incoming remote invocations. This setup procedure can be either encapsulated in a method of the remote object implementation class itself or included in another class entirely. The setup procedure should do the following:</p>
+<ul>
+<li>Create and install a security manager</li>
+<li>Create and export one or more remote objects</li>
+<li>Register at least one remote object with the RMI registry (or with another naming service, such as a service accessible through the Java Naming and Directory Interface) for bootstrapping purposes</li>
+</ul>
+<p>The <a href="https://github.com/wangding0421/JavaTutorial/blob/master/RMI/ComputeEngine.java" target="_blank" rel="external"><code>engine.ComputeEngine</code></a> class implements the remote interface Compute and also includes the main method for setting up the compute engine.</p>
+<p>The rules governing how arguments and return values are passed are as follows:</p>
+<ul>
+<li>Remote objects are essentially passed by reference. A remote object reference is a stub, which is a client-side proxy that implements the complete set of remote interfaces that the remote object implements.</li>
+<li>Local objects are passed by copy, using object serialization. By default, all fields are copied except fields that are marked <code>static</code> or <code>transient</code>. Default serialization behavior can be overridden on a class-by-class basis.</li>
+</ul>
+<p>The system provides a particular type of remote object, the RMI registry, for finding references to other remote objects. The RMI registry is a simple remote object naming service that enables clients to obtain a reference to a remote object by name. The registry is typically only used to locate the first remote object that an RMI client needs to use. That first remote object might then provide support for finding other objects.</p>
+<p>When a client performs a lookup in a server’s remote object registry, a copy of the stub is returned. Remote objects in such cases are thus effectively passed by (remote) reference rather than by value.</p>
+<h2 id="Creating-a-Client-Program"><a href="#Creating-a-Client-Program" class="headerlink" title="Creating a Client Program"></a><a href="https://docs.oracle.com/javase/tutorial/rmi/client.html" target="_blank" rel="external">Creating a Client Program</a></h2><p>A client needs to call the compute engine, but it also has to define the task to be performed by the compute engine.</p>
+<p>There is the <code>Task</code> interface in the client side. </p>
+<p>The <a href="https://github.com/wangding0421/JavaTutorial/blob/master/RMI/ComputePi.java" target="_blank" rel="external"><code>client.ComputePi</code></a> class implements main class of the client program. And the following graph shows how the procedure goes:</p>
+<p><img src="https://docs.oracle.com/javase/tutorial/figures/rmi/rmi-4.gif" alt="ComputePi"></p>
+<p>The <a href="https://github.com/wangding0421/JavaTutorial/blob/master/RMI/Pi.java" target="_blank" rel="external"><code>Pi</code></a> class implements the Task interface and computes the value of the $/pi$ symbol to a specified number of decimal places. It implements the <code>Task</code> interface and it is serializiable.</p>
+<p>The most interesting feature of this example is that the <code>Compute</code> implementation object never needs the <code>Pi</code> class’s definition until a Pi object is passed in as an argument to the <code>executeTask</code> method. At that point, the code for the class is loaded by RMI into the <code>Compute</code> object’s Java virtual machine, the <code>execute</code> method is invoked, and the task’s code is executed. The result, which in the case of the <code>Pi</code> task is a <code>BigDecimal</code> object, is handed back to the calling client, where it is used to print the result of the computation.</p>
+<h2 id="Compiling-and-Running-the-Example"><a href="#Compiling-and-Running-the-Example" class="headerlink" title="Compiling and Running the Example"></a><a href="https://docs.oracle.com/javase/tutorial/rmi/example.html" target="_blank" rel="external">Compiling and Running the Example</a></h2><h3 id="Compiling-the-Example-Programs"><a href="#Compiling-the-Example-Programs" class="headerlink" title="Compiling the Example Programs"></a><a href="https://docs.oracle.com/javase/tutorial/rmi/compiling.html" target="_blank" rel="external">Compiling the Example Programs</a></h3><p>In a real-world scenario in which a service such as the compute engine is deployed, a developer would likely create a Java Archive (JAR) file that contains the <code>Compute</code> and <code>Task</code> interfaces for server classes to implement and client programs to use. Next, a developer, perhaps the same developer of the interface JAR file, would write an implementation of the <code>Compute</code> interface and deploy that service on a machine available to clients. Developers of client programs can use the <code>Compute</code> and the <code>Task</code> interfaces, contained in the JAR file, and independently develop a task and client program that uses a Compute service:</p>
+<h4 id="Building-a-JAR-File-of-Interface-Classes"><a href="#Building-a-JAR-File-of-Interface-Classes" class="headerlink" title="Building a JAR File of Interface Classes"></a>Building a JAR File of Interface Classes</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javac compute/Compute.java compute/Task.java</span><br><span class="line">jar cvf compute.jar compute/*.class</span><br></pre></td></tr></table></figure>
+<h4 id="Building-the-Server-Classes"><a href="#Building-the-Server-Classes" class="headerlink" title="Building the Server Classes"></a>Building the Server Classes</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javac -cp /path/to/compute.jar</span><br><span class="line">    engine/ComputeEngine.java</span><br></pre></td></tr></table></figure>
+<h4 id="Building-the-Client-Classes"><a href="#Building-the-Client-Classes" class="headerlink" title="Building the Client Classes"></a>Building the Client Classes</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">javac -cp /path/to/compute.jar</span><br><span class="line">    client/ComputePi.java client/Pi.java</span><br><span class="line">mkdir /path/to/publicserver/client</span><br><span class="line">cp client/Pi.class</span><br><span class="line">    /path/to/publicserver/client</span><br></pre></td></tr></table></figure>
+<h3 id="Running-the-Example-Programs"><a href="#Running-the-Example-Programs" class="headerlink" title="Running the Example Programs"></a><a href="https://docs.oracle.com/javase/tutorial/rmi/running.html" target="_blank" rel="external">Running the Example Programs</a></h3><h4 id="Starting-the-Server"><a href="#Starting-the-Server" class="headerlink" title="Starting the Server"></a>Starting the Server</h4><p>The below command starts the RMI registry.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rmiregistry &amp;</span><br></pre></td></tr></table></figure>
+<p>The below command starts the server.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">java -cp /home/to/src:/path/to/compute.jar</span><br><span class="line">     -Djava.rmi.server.codebase=http://publicserveraddr/compute.jar</span><br><span class="line">     -Djava.rmi.server.hostname=mycomputer.example.com</span><br><span class="line">     -Djava.security.policy=server.policy</span><br><span class="line">        engine.ComputeEngine</span><br></pre></td></tr></table></figure>
+<h4 id="Starting-the-Client"><a href="#Starting-the-Client" class="headerlink" title="Starting the Client"></a>Starting the Client</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java -cp /home/to/src:/path/to/compute.jar</span><br><span class="line">     -Djava.rmi.server.codebase=http://publicserveraddr/</span><br><span class="line">     -Djava.security.policy=client.policy</span><br><span class="line">        client.ComputePi mycomputer.example.com 45</span><br></pre></td></tr></table></figure>
+<p>The following figure illustrates where the <code>rmiregistry</code>, the <code>ComputeEngine</code> server, and the <code>ComputePi</code> client obtain classes during program execution.</p>
+<p><img src="https://docs.oracle.com/javase/tutorial/figures/rmi/rmi-5.gif" alt="Obtain Classes"> </p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag">#Java</a>
+          
+            <a href="/tags/Tutorial/" rel="tag">#Tutorial</a>
+          
+            <a href="/tags/RMI/" rel="tag">#RMI</a>
+          
+            <a href="/tags/client-server/" rel="tag">#client-server</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/12/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/default_avatar.jpg"
+               alt="Ding Wang" />
+          <p class="site-author-name" itemprop="name">Ding Wang</p>
+          <p class="site-description motion-element" itemprop="description">Greetings, traveller!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-RMI"><span class="nav-number">1.</span> <span class="nav-text">Java RMI</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#An-Overview-of-RMI-Applications"><span class="nav-number">1.2.</span> <span class="nav-text">An Overview of RMI Applications</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Creating-Distributed-Applications-by-Using-RMI"><span class="nav-number">1.2.1.</span> <span class="nav-text">Creating Distributed Applications by Using RMI</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Writing-an-RMI-Server"><span class="nav-number">1.3.</span> <span class="nav-text">Writing an RMI Server</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Designing-a-Remote-Interface"><span class="nav-number">1.3.1.</span> <span class="nav-text">Designing a Remote Interface</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementing-a-Remote-Interface"><span class="nav-number">1.3.2.</span> <span class="nav-text">Implementing a Remote Interface</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Creating-a-Client-Program"><span class="nav-number">1.4.</span> <span class="nav-text">Creating a Client Program</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compiling-and-Running-the-Example"><span class="nav-number">1.5.</span> <span class="nav-text">Compiling and Running the Example</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Compiling-the-Example-Programs"><span class="nav-number">1.5.1.</span> <span class="nav-text">Compiling the Example Programs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Building-a-JAR-File-of-Interface-Classes"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">Building a JAR File of Interface Classes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Building-the-Server-Classes"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">Building the Server Classes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Building-the-Client-Classes"><span class="nav-number">1.5.1.3.</span> <span class="nav-text">Building the Client Classes</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Running-the-Example-Programs"><span class="nav-number">1.5.2.</span> <span class="nav-text">Running the Example Programs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Starting-the-Server"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">Starting the Server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Starting-the-Client"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">Starting the Client</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ding Wang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
