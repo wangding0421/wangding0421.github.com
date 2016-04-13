@@ -1,0 +1,668 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Google,BigTable,C++,Tutorial," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Bigtable: A Distributed Storage System for Structured Data
+One-line SummaryBigtable is a distributed storage system for managing structured data that is designed to scale to a very large size: petabyt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Google BigTable Tutorial">
+<meta property="og:url" content="wangding0421.github.io/2016/04/13/GoogleBigTableTutorial/index.html">
+<meta property="og:site_name" content="7d334507a8c41c33's Home">
+<meta property="og:description" content="Bigtable: A Distributed Storage System for Structured Data
+One-line SummaryBigtable is a distributed storage system for managing structured data that is designed to scale to a very large size: petabyt">
+<meta property="og:image" content="https://www.usenix.org/legacy/events/osdi06/tech/chang/chang_html/img5.png">
+<meta property="og:image" content="http://image.slidesharecdn.com/iraklispsaroudakis-key-valuestores-120306055234-phpapp01/95/bigtable-and-dynamo-8-728.jpg?cb=1331014359">
+<meta property="og:image" content="http://zhangjunhd.github.io/assets/2013-03-10-bigtable/2.png">
+<meta property="og:image" content="http://zhangjunhd.github.io/assets/2013-03-10-bigtable/3.png">
+<meta property="og:updated_time" content="2016-04-13T20:26:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Google BigTable Tutorial">
+<meta name="twitter:description" content="Bigtable: A Distributed Storage System for Structured Data
+One-line SummaryBigtable is a distributed storage system for managing structured data that is designed to scale to a very large size: petabyt">
+<meta name="twitter:image" content="https://www.usenix.org/legacy/events/osdi06/tech/chang/chang_html/img5.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Google BigTable Tutorial | 7d334507a8c41c33's Home </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">7d334507a8c41c33's Home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Google BigTable Tutorial
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-13T13:20:33-07:00" content="2016-04-13">
+              2016-04-13
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/13/GoogleBigTableTutorial/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/13/GoogleBigTableTutorial/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://static.googleusercontent.com/media/research.google.com/en//archive/bigtable-osdi06.pdf" target="_blank" rel="external">Bigtable: A Distributed Storage System for Structured Data</a></p>
+<h1 id="One-line-Summary"><a href="#One-line-Summary" class="headerlink" title="One-line Summary"></a>One-line Summary</h1><p>Bigtable is a distributed storage system for managing structured data that is designed to scale to a very large size: petabytes of data across thousands of commodity servers.</p>
+<a id="more"></a>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><ul>
+<li>In many ways, Bigtable resembles a database: it shares many implementation strategies with databases.</li>
+<li>Bigtable provides clients with a simple data model that supports dynamic control over data layout and format, and allows clients to reason about the locality properties of the data represented in the underlying storage.<ul>
+<li>Data is indexed using row and column names that can be arbitrary strings.</li>
+</ul>
+</li>
+<li>Finally, Bigtable schema parameters let clients dynamically control whether to serve data out of memory or from disk.</li>
+</ul>
+<h1 id="Data-Model"><a href="#Data-Model" class="headerlink" title="Data Model"></a>Data Model</h1><p>First there is an example of a <em>Webtable</em>:</p>
+<p><img src="https://www.usenix.org/legacy/events/osdi06/tech/chang/chang_html/img5.png" alt="Webtable Example"> </p>
+<p>The row name is a reversed URL. The contents column family contains the page contents, and the anchor column family contains the text of any anchors that reference the page. CNN’s home page is referenced by both the Sports Illustrated and the MY-look home pages, so the row contains columns named anchor:cnnsi.com and anchor:my.look.ca. Each anchor cell has one version; the contents column has three versions, at timestamps t3, t5, and t6.</p>
+<h2 id="Rows"><a href="#Rows" class="headerlink" title="Rows"></a>Rows</h2><ul>
+<li>Row key is 64KB in size, but typical 10-100 bytes.</li>
+<li>Every read/write for a single row key is atomic.</li>
+<li>Data sorted in lexicographically by row key.</li>
+<li>Each <em>tablet</em> contains all data associated with a row range by dynamically partition, this is the unit of distribution and load balancing.</li>
+<li>Reversed URL: com.cnn.www, com.google.maps/index.html, etc.</li>
+</ul>
+<h2 id="Column-Families"><a href="#Column-Families" class="headerlink" title="Column Families"></a>Column Families</h2><ul>
+<li>Column keys are grouped into sets called column families, which form the basic unit of access control.</li>
+<li>A column key is named using the following syntax: <code>family:qualifier</code>.</li>
+<li>An example of column family is the <strong>anchor</strong> in the above figure.</li>
+<li>Access control and both disk and memory accounting are performed at the column-family level.</li>
+</ul>
+<h2 id="Timestamps"><a href="#Timestamps" class="headerlink" title="Timestamps"></a>Timestamps</h2><ul>
+<li>Each cell in a Bigtable can contain multiple versions of the same data; these versions are indexed by timestamp.</li>
+<li>Can be either assgined by Bigtable or by client applications.</li>
+<li>Garbage collection:<ul>
+<li>Specify the number of version to be kept</li>
+<li>Specify the time period a version to be kept</li>
+</ul>
+</li>
+</ul>
+<h1 id="APIs"><a href="#APIs" class="headerlink" title="APIs"></a>APIs</h1><p>The Bigtable API provides functions for creating and deleting tables and column families. It also provides functions for changing cluster, table, and column family metadata, such as access control rights.</p>
+<p>Two examples below:</p>
+<p><img src="http://image.slidesharecdn.com/iraklispsaroudakis-key-valuestores-120306055234-phpapp01/95/bigtable-and-dynamo-8-728.jpg?cb=1331014359" alt="Write and Read"></p>
+<h1 id="Building-Blocks"><a href="#Building-Blocks" class="headerlink" title="Building Blocks"></a>Building Blocks</h1><ul>
+<li>Bigtable uses the distributed <em>Google File System (GFS)</em> to store log and data files.</li>
+<li>The Google <em>SSTable</em> file format is used internally to store Bigtable data.<ul>
+<li>A persistent, ordered immutable map from keys to values.</li>
+<li>Contains a sequence of blocks and the block index stored at the end of SSTable.</li>
+<li>Block index is loaded into memory when the SSTable is opened.</li>
+<li>Optionally, an SSTable can be completely mapped into memory.<br>*Bigtable relies on a highly-available and persistent distributed lock service called Chubby.</li>
+</ul>
+</li>
+</ul>
+<h1 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h1><p>A Bigtable cluster stores a number of tables. Each table consists of a set of tablets, and each tablet contains all data associated with a row range. Initially, each table consists of just one tablet. As a table grows, it is automatically split into multiple tablets.</p>
+<p>The Bigtable implementation has three major components: a library that is linked into every client, one master server, and many tablet servers.</p>
+<ul>
+<li>Master: Responsible for assigning tablets to tablet servers, detecting the addition and expiration of tablet servers, balancing tablet-server load, and garbage collection of files in GFS.</li>
+<li>Tablet: Each tablet server manages a set of tablets, the tablet server handles read and write requests to the tablets that it has loaded, and also splits tablets that have grown too large.</li>
+<li>Client: Clients communicate directly with tablet servers for reads and writes.</li>
+</ul>
+<h2 id="Tablet-Location"><a href="#Tablet-Location" class="headerlink" title="Tablet Location"></a>Tablet Location</h2><p>See the below image:</p>
+<p><img src="http://zhangjunhd.github.io/assets/2013-03-10-bigtable/2.png" alt="Three-level hierarchy"> </p>
+<p>The first level is a file stored in Chubby that contains the location of the <em>root tablet</em>. The root tablet contains the location of all tablets in a special <strong>METADATA</strong> table. Each <strong>METADATA</strong> tablet contains the location of a set of user tablets.</p>
+<p>The <strong>METADATA</strong> table stores the location of a tablet under a row key that is an encoding of the tablet’s table identifier and its end row.</p>
+<p>The client library caches tablet locations. If the client does not know the location of a tablet, or if it discovers that cached location information is incorrect, then it recursively moves up the tablet location hierarchy.</p>
+<h2 id="Tablet-Assignment"><a href="#Tablet-Assignment" class="headerlink" title="Tablet Assignment"></a>Tablet Assignment</h2><p>To sum up, the tablet contains <strong>assigned tablets</strong> and <strong>unassigned tablets</strong>. The assignment of tablets are managed by the master. However Chubby is the master of all which can control the execution of the master as well as the tablets. </p>
+<p>Tablets and master have to hold their lock (locker for tablets and master locker for the master) to execute. THerefore the master has to do regular check on the tablet servers to do cleanup and tablet reassignment.</p>
+<p>Chubby -&gt; Master -&gt; Tablet Server -&gt; Tablet</p>
+<h2 id="Tablet-Serving"><a href="#Tablet-Serving" class="headerlink" title="Tablet Serving"></a>Tablet Serving</h2><p><img src="http://zhangjunhd.github.io/assets/2013-03-10-bigtable/3.png" alt="Tablet Serving"> </p>
+<ul>
+<li>Commit log stores the writes<ul>
+<li>Recent writes are stored in the memtable</li>
+<li>Older writes are stored in SSTables</li>
+</ul>
+</li>
+<li>Read operations see a merged view of the memtable and the SSTables</li>
+</ul>
+<h2 id="Compactions"><a href="#Compactions" class="headerlink" title="Compactions"></a>Compactions</h2><ul>
+<li>Minor compaction: When the memtable size reaches a threshold, the memtable is frozen, a new memtable is created, and the frozen memtable is converted to an SSTable and written to GFS.</li>
+<li>Merging compaction: A merging compaction reads the contents of a few SSTables and the memtable, and writes out a new SSTable.</li>
+<li>Major compactinon: A merging compaction that rewrites all SSTables into exactly one SSTable is called a major compaction. (Clean &amp; Complete, saving space &amp; reclaiming resources)</li>
+</ul>
+<h1 id="Refinements"><a href="#Refinements" class="headerlink" title="Refinements"></a>Refinements</h1><p><strong>Locality Groups</strong>: Clients can group multiple column families together into a locality group. For example in the Webtable. The language and checksum (page metadata) can be put into one locality group and the content could be in another locality group for better faster access performance. Locality group could be treated and handled together, thus no need to load data for several times.</p>
+<p><strong>Compression</strong>: Clients can control whether or not the SSTables for a locality group are compressed, and if so, which compression format is used.</p>
+<p><strong>Caching for Read Performance</strong>: The Scan Cache is a higher-level cache that caches the key-value pairs returned by the SSTable interface to the tablet server code, this is good for reading same data repeatly. The Block Cache is a lower-level cache that caches SSTables blocks that were read from GFS, this is good for sequencial reads or random reads of different columns in the same locality group within a hot row.</p>
+<p><strong>Bloom Filters</strong>: Reduce read operation disk access.</p>
+<p><strong>Commit-log Implementation</strong>: Append mutations to a single commit log per tablet server, co-mingling mutations for different tablets in the same physical log file. Sort the merged log file by <code>⟨table, row name, log sequence number⟩</code> for faster recovery.</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Google/" rel="tag">#Google</a>
+          
+            <a href="/tags/BigTable/" rel="tag">#BigTable</a>
+          
+            <a href="/tags/C/" rel="tag">#C++</a>
+          
+            <a href="/tags/Tutorial/" rel="tag">#Tutorial</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/12/RMI/" rel="next" title="Java RMI">
+                <i class="fa fa-chevron-left"></i> Java RMI
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/13/GoogleBigTableTutorial/"
+           data-title="Google BigTable Tutorial" data-url="wangding0421.github.io/2016/04/13/GoogleBigTableTutorial/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/3810590?v=3&s=460"
+               alt="Ding Wang" />
+          <p class="site-author-name" itemprop="name">Ding Wang</p>
+          <p class="site-description motion-element" itemprop="description">Greetings, traveller!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#One-line-Summary"><span class="nav-number">1.</span> <span class="nav-text">One-line Summary</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Model"><span class="nav-number">3.</span> <span class="nav-text">Data Model</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Rows"><span class="nav-number">3.1.</span> <span class="nav-text">Rows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Column-Families"><span class="nav-number">3.2.</span> <span class="nav-text">Column Families</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Timestamps"><span class="nav-number">3.3.</span> <span class="nav-text">Timestamps</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#APIs"><span class="nav-number">4.</span> <span class="nav-text">APIs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Building-Blocks"><span class="nav-number">5.</span> <span class="nav-text">Building Blocks</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementation"><span class="nav-number">6.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tablet-Location"><span class="nav-number">6.1.</span> <span class="nav-text">Tablet Location</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tablet-Assignment"><span class="nav-number">6.2.</span> <span class="nav-text">Tablet Assignment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tablet-Serving"><span class="nav-number">6.3.</span> <span class="nav-text">Tablet Serving</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compactions"><span class="nav-number">6.4.</span> <span class="nav-text">Compactions</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Refinements"><span class="nav-number">7.</span> <span class="nav-text">Refinements</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ding Wang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wangding0421"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
