@@ -239,6 +239,147 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/19/UbuntuSpacemacs/" itemprop="url">
+                  UbuntuSpacemacs
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-19T16:31:36-07:00" content="2016-04-19">
+              2016-04-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CCTV10-科教/" itemprop="url" rel="index">
+                    <span itemprop="name">CCTV10-科教</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/19/UbuntuSpacemacs/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/19/UbuntuSpacemacs/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/04/19/UbuntuSpacemacs/" class="leancloud_visitors" data-flag-title="UbuntuSpacemacs">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>之前一直都是在Mac上用的Spacemacs, Mac下的Homebrew可以安装到基本上来说最新版本的Emacs. 所以也就没有遇到过什么问题，但后来在自己的PC上装了Ubuntu之后才发现Ubuntu自带的apt-get的Emacs版本只更新到的24.3，然而Spacemacs要求的各种library基本上都要在24.4或者以上。所以Spacemacs作者给出的建议很简单：build from source.</p>
+<p>但其实Emacs的gnu<a href="https://www.gnu.org/software/emacs/manual/html_node/efaq/Installing-Emacs.html" target="_blank" rel="external">官网</a> 上面的教程基本上是假设你电脑上该配的环境都配好了，个人感觉Emacs非要build from source的人肯定是有了电脑第一件事就是装Emacs的，可能很多dependency都还没来得及装。网上各种建议这么装那么装的感觉不是很靠谱，我参考了一些觉得<a href="http://ubuntuhandbook.org/index.php/2014/10/emacs-24-4-released-install-in-ubuntu-14-04/" target="_blank" rel="external">这个网站</a>的教程最合理，贴到这做个纪录。</p>
+<h1 id="安装必要库"><a href="#安装必要库" class="headerlink" title="安装必要库"></a>安装必要库</h1><p>Emacs需要很多dependencies才可以正常工作，直接用Ubuntu的apt-get装Emacs是可以自动装这些dependencies，我们必须手动装这些，具体方法是下面两行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential</span><br><span class="line">sudo apt-get build-dep emacs24</span><br></pre></td></tr></table></figure>
+<h1 id="下载解压Emacs"><a href="#下载解压Emacs" class="headerlink" title="下载解压Emacs"></a>下载解压Emacs</h1><p>装好之后，就请去Emacs的官网下载最新的Emacs，<a href="http://ftp.gnu.org/gnu/emacs/" target="_blank" rel="external">传送门</a>在此。注意要下载的应该是一个叫做<code>emacs-(VERSION).tar.gz</code>的文件，这个Version就挑24开头的最大的就行。现在应该是24.5。</p>
+<p>假设我们下载到了<code>~/Downloads</code>目录下，那接下来就是解压：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~/Downloads &amp;&amp; tar -xf emacs-(VERSION).tar.* &amp;&amp; cd emacs-(VERSION)</span><br></pre></td></tr></table></figure>
+<h1 id="安装Emacs，大功告成"><a href="#安装Emacs，大功告成" class="headerlink" title="安装Emacs，大功告成"></a>安装Emacs，大功告成</h1><p>最后依次输入下面三行命令就行了，注意后两行命令是建立在第一行命令没有Bug的基础上，而第一行命令想要没有Bug需要我们第一步正确安装所有必要的库。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<h1 id="Optional-安装Spacemacs"><a href="#Optional-安装Spacemacs" class="headerlink" title="(Optional)安装Spacemacs"></a>(Optional)安装Spacemacs</h1><p>Spacemacs是一个已经被无数人调试优化过的很好的Emacs版本，如果想要安装的话就在上面一步完成之后clone一下他的GitHub即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm -rf ~/.emacs.d</span><br><span class="line">git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d</span><br></pre></td></tr></table></figure>
+<p>最后在命令行里打入<code>emacs</code>，Spacemacs就会自动安装，升级，就搞定了。</p>
+<p>关于Spacemacs的更多信息可以参照<a href="http://spacemacs.org/" target="_blank" rel="external">官网</a>。</p>
+<p>Happying Coding!</p>
+
+          
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/15/ZaiXiaBanBenYouHeGuiGan/" itemprop="url">
                   在下坂本，有何贵干
                 </a>
@@ -1041,7 +1182,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1058,7 +1199,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
