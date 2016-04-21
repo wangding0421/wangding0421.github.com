@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Tutorial,Linux,Emacs," />
+  <meta name="keywords" content="Python,Spark,Summary,Data mining," />
 
 
 
@@ -80,16 +80,19 @@
 
 
 
-<meta name="description" content="之前一直都是在Mac上用的Spacemacs, Mac下的Homebrew可以安装到基本上来说最新版本的Emacs. 所以也就没有遇到过什么问题，但后来在自己的PC上装了Ubuntu之后才发现Ubuntu自带的apt-get的Emacs版本只更新到的24.3，然而Spacemacs要求的各种library基本上都要在24.4或者以上。所以Spacemacs作者给出的建议很简单：build from">
+<meta name="description" content="传送门是Pyspark的API网站。具体的信息这里都可以找到。
+总结一些Spark的实用技巧：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在Ubuntu下正确配置Spacemacs">
-<meta property="og:url" content="wangding0421.github.io/2016/04/19/UbuntuSpacemacs/index.html">
+<meta property="og:title" content="SparkSkills">
+<meta property="og:url" content="wangding0421.github.io/2016/04/21/SparkSkills/index.html">
 <meta property="og:site_name" content="7d334507a8c41c33's Home">
-<meta property="og:description" content="之前一直都是在Mac上用的Spacemacs, Mac下的Homebrew可以安装到基本上来说最新版本的Emacs. 所以也就没有遇到过什么问题，但后来在自己的PC上装了Ubuntu之后才发现Ubuntu自带的apt-get的Emacs版本只更新到的24.3，然而Spacemacs要求的各种library基本上都要在24.4或者以上。所以Spacemacs作者给出的建议很简单：build from">
-<meta property="og:updated_time" content="2016-04-21T19:59:15.000Z">
+<meta property="og:description" content="传送门是Pyspark的API网站。具体的信息这里都可以找到。
+总结一些Spark的实用技巧：">
+<meta property="og:updated_time" content="2016-04-21T19:59:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在Ubuntu下正确配置Spacemacs">
-<meta name="twitter:description" content="之前一直都是在Mac上用的Spacemacs, Mac下的Homebrew可以安装到基本上来说最新版本的Emacs. 所以也就没有遇到过什么问题，但后来在自己的PC上装了Ubuntu之后才发现Ubuntu自带的apt-get的Emacs版本只更新到的24.3，然而Spacemacs要求的各种library基本上都要在24.4或者以上。所以Spacemacs作者给出的建议很简单：build from">
+<meta name="twitter:title" content="SparkSkills">
+<meta name="twitter:description" content="传送门是Pyspark的API网站。具体的信息这里都可以找到。
+总结一些Spark的实用技巧：">
 
 
 
@@ -107,7 +110,7 @@
   };
 </script>
 
-  <title> 在Ubuntu下正确配置Spacemacs | 7d334507a8c41c33's Home </title>
+  <title> SparkSkills | 7d334507a8c41c33's Home </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -237,7 +240,7 @@
             
             
               
-                在Ubuntu下正确配置Spacemacs
+                SparkSkills
               
             
           </h1>
@@ -249,8 +252,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-19T16:31:36-07:00" content="2016-04-19">
-              2016-04-19
+            <time itemprop="dateCreated" datetime="2016-04-21T12:38:28-07:00" content="2016-04-21">
+              2016-04-21
             </time>
           </span>
 
@@ -279,8 +282,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/19/UbuntuSpacemacs/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/19/UbuntuSpacemacs/" itemprop="commentsCount"></span>
+                <a href="/2016/04/21/SparkSkills/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/21/SparkSkills/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -290,7 +293,7 @@
 
           
           
-             <span id="/2016/04/19/UbuntuSpacemacs/" class="leancloud_visitors" data-flag-title="在Ubuntu下正确配置Spacemacs">
+             <span id="/2016/04/21/SparkSkills/" class="leancloud_visitors" data-flag-title="SparkSkills">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -311,21 +314,19 @@
       
 
       
-        <p>之前一直都是在Mac上用的Spacemacs, Mac下的Homebrew可以安装到基本上来说最新版本的Emacs. 所以也就没有遇到过什么问题，但后来在自己的PC上装了Ubuntu之后才发现Ubuntu自带的apt-get的Emacs版本只更新到的24.3，然而Spacemacs要求的各种library基本上都要在24.4或者以上。所以Spacemacs作者给出的建议很简单：build from source.</p>
-<p>但其实Emacs的gnu<a href="https://www.gnu.org/software/emacs/manual/html_node/efaq/Installing-Emacs.html" target="_blank" rel="external">官网</a>上面的教程基本上是假设你电脑上该配的环境都配好了，个人感觉Emacs非要build from source的人肯定是有了电脑第一件事就是装Emacs的，可能很多dependency都还没来得及装。网上各种建议这么装那么装的感觉不是很靠谱，我参考了一些觉得<a href="http://ubuntuhandbook.org/index.php/2014/10/emacs-24-4-released-install-in-ubuntu-14-04/" target="_blank" rel="external">这个网站</a>的教程最合理，贴到这做个纪录。</p>
+        <p><a href="http://spark.apache.org/docs/latest/api/python/index.html" target="_blank" rel="external">传送门</a>是Pyspark的API网站。具体的信息这里都可以找到。</p>
+<p>总结一些Spark的实用技巧：</p>
 <a id="more"></a>
-<h1 id="安装必要库"><a href="#安装必要库" class="headerlink" title="安装必要库"></a>安装必要库</h1><p>Emacs需要很多dependencies才可以正常工作，直接用Ubuntu的apt-get装Emacs是可以自动装这些dependencies，我们必须手动装这些，具体方法是下面两行命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential</span><br><span class="line">sudo apt-get build-dep emacs24</span><br></pre></td></tr></table></figure>
-<h1 id="下载解压Emacs"><a href="#下载解压Emacs" class="headerlink" title="下载解压Emacs"></a>下载解压Emacs</h1><p>装好之后，就请去Emacs的官网下载最新的Emacs，<a href="http://ftp.gnu.org/gnu/emacs/" target="_blank" rel="external">传送门</a>在此。注意要下载的应该是一个叫做<code>emacs-(VERSION).tar.gz</code>的文件，这个Version就挑24开头的最大的就行。现在应该是24.5。</p>
-<p>假设我们下载到了<code>~/Downloads</code>目录下，那接下来就是解压：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~/Downloads &amp;&amp; tar -xf emacs-(VERSION).tar.* &amp;&amp; cd emacs-(VERSION)</span><br></pre></td></tr></table></figure>
-<h1 id="安装Emacs，大功告成"><a href="#安装Emacs，大功告成" class="headerlink" title="安装Emacs，大功告成"></a>安装Emacs，大功告成</h1><p>最后依次输入下面三行命令就行了，注意后两行命令是建立在第一行命令没有Bug的基础上，而第一行命令想要没有Bug需要我们第一步正确安装所有必要的库。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-<h1 id="Optional-安装Spacemacs"><a href="#Optional-安装Spacemacs" class="headerlink" title="(Optional)安装Spacemacs"></a>(Optional)安装Spacemacs</h1><p>Spacemacs是一个已经被无数人调试优化过的很好的Emacs版本，如果想要安装的话就在上面一步完成之后clone一下他的GitHub即可：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm -rf ~/.emacs.d</span><br><span class="line">git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d</span><br></pre></td></tr></table></figure>
-<p>最后在命令行里打入<code>emacs</code>，Spacemacs就会自动安装，升级，就搞定了。</p>
-<p>关于Spacemacs的更多信息可以参照<a href="http://spacemacs.org/" target="_blank" rel="external">官网</a>。</p>
-<p>Happy Coding!</p>
+<h1 id="提高代码运行效率"><a href="#提高代码运行效率" class="headerlink" title="提高代码运行效率"></a>提高代码运行效率</h1><ul>
+<li>把<code>cache()</code>放在<code>repartition()</code>前面会比放在后面高效很多倍，具体原因是因为<code>repartition()</code>操作无法继续lazy execution所以需要调用memory，这样的话提早把RDD存入cache就会节省一次时间。</li>
+</ul>
+<p>举例，下面两份代码第一份优于第二份：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sRDD_text.map(someFunc)\</span><br><span class="line">.cache()</span><br><span class="line">.repartition()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sRDD_text.map(someFunc)\</span><br><span class="line">.repartition()</span><br><span class="line">.cache()</span><br></pre></td></tr></table></figure>
+<h1 id="Key-Value-pair操作"><a href="#Key-Value-pair操作" class="headerlink" title="Key-Value pair操作"></a>Key-Value pair操作</h1><h2 id="combineByKey"><a href="#combineByKey" class="headerlink" title="combineByKey()"></a><code>combineByKey()</code></h2><p>Spark对于Key-Value的设计提供了很多巧妙的操作，其中最巧妙的当属<code>combineByKey()</code>，这个方法我在我的spark repo里面有例子，这里不多说了，只要记住里面的三个function分别对应：第一次遇到某Value的操作，不是第一次遇到某Value的操作，以及将不同partition的结果合并的操作就可以，放一个例子在这里：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">rdd = sc.parallelize([(<span class="string">"Sleep"</span>, <span class="number">7</span>), (<span class="string">"Work"</span>,<span class="number">5</span>), (<span class="string">"Play"</span>, <span class="number">3</span>), </span><br><span class="line">                      (<span class="string">"Sleep"</span>, <span class="number">6</span>), (<span class="string">"Work"</span>,<span class="number">4</span>), (<span class="string">"Play"</span>, <span class="number">4</span>),</span><br><span class="line">                      (<span class="string">"Sleep"</span>, <span class="number">8</span>), (<span class="string">"Work"</span>,<span class="number">5</span>), (<span class="string">"Play"</span>, <span class="number">5</span>)])</span><br><span class="line"></span><br><span class="line">sum_counts = rdd.combineByKey(</span><br><span class="line">    (<span class="keyword">lambda</span> x: (x, <span class="number">1</span>)), <span class="comment"># createCombiner maps each value into a  combiner (or accumulator)</span></span><br><span class="line">    (<span class="keyword">lambda</span> acc, value: (acc[<span class="number">0</span>]+value, acc[<span class="number">1</span>]+<span class="number">1</span>)),</span><br><span class="line"><span class="comment">#mergeValue defines how to merge a accumulator with a value (saves on mapping each value to an accumulator first)</span></span><br><span class="line">    (<span class="keyword">lambda</span> acc1, acc2: (acc1[<span class="number">0</span>]+acc2[<span class="number">0</span>], acc1[<span class="number">1</span>]+acc2[<span class="number">1</span>])) <span class="comment"># combine accumulators</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> sum_counts.collect()</span><br><span class="line">duration_means_by_activity = sum_counts.mapValues(<span class="keyword">lambda</span> value:</span><br><span class="line">                                                  value[<span class="number">0</span>]*<span class="number">1.0</span>/value[<span class="number">1</span>]) \</span><br><span class="line">                                            .collect()</span><br><span class="line"><span class="keyword">print</span> duration_means_by_activity</span><br></pre></td></tr></table></figure>
+<h2 id="flatMapValues"><a href="#flatMapValues" class="headerlink" title="flatMapValues()"></a><code>flatMapValues()</code></h2><p>这个function的牛逼之处就在于可以把一个Key-Value的pair拆成很多个，举个例子比如一个<code>(int, list)</code>的pair，可以拆成很多个，每个的Key保持不变而Value就是list中的每一个。比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">l_group_TokenK = tRDD_user_token.flatMapValues(<span class="keyword">lambda</span> x: x).filter(<span class="keyword">lambda</span> x: x[<span class="number">1</span>] <span class="keyword">in</span> d_geq100Tokens)\</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -346,11 +347,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Tutorial/" rel="tag">#Tutorial</a>
+            <a href="/tags/Python/" rel="tag">#Python</a>
           
-            <a href="/tags/Linux/" rel="tag">#Linux</a>
+            <a href="/tags/Spark/" rel="tag">#Spark</a>
           
-            <a href="/tags/Emacs/" rel="tag">#Emacs</a>
+            <a href="/tags/Summary/" rel="tag">#Summary</a>
+          
+            <a href="/tags/Data-mining/" rel="tag">#Data mining</a>
           
         </div>
       
@@ -359,17 +362,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/15/ZaiXiaBanBenYouHeGuiGan/" rel="next" title="在下坂本，有何贵干">
-                <i class="fa fa-chevron-left"></i> 在下坂本，有何贵干
+              <a href="/2016/04/19/UbuntuSpacemacs/" rel="next" title="在Ubuntu下正确配置Spacemacs">
+                <i class="fa fa-chevron-left"></i> 在Ubuntu下正确配置Spacemacs
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/21/SparkSkills/" rel="prev" title="SparkSkills">
-                SparkSkills <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -395,8 +394,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/19/UbuntuSpacemacs/"
-           data-title="在Ubuntu下正确配置Spacemacs" data-url="wangding0421.github.io/2016/04/19/UbuntuSpacemacs/">
+      <div class="ds-thread" data-thread-key="2016/04/21/SparkSkills/"
+           data-title="SparkSkills" data-url="wangding0421.github.io/2016/04/21/SparkSkills/">
       </div>
     
   </div>
@@ -518,7 +517,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装必要库"><span class="nav-number">1.</span> <span class="nav-text">安装必要库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下载解压Emacs"><span class="nav-number">2.</span> <span class="nav-text">下载解压Emacs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Emacs，大功告成"><span class="nav-number">3.</span> <span class="nav-text">安装Emacs，大功告成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optional-安装Spacemacs"><span class="nav-number">4.</span> <span class="nav-text">(Optional)安装Spacemacs</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#提高代码运行效率"><span class="nav-number">1.</span> <span class="nav-text">提高代码运行效率</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Key-Value-pair操作"><span class="nav-number">2.</span> <span class="nav-text">Key-Value pair操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#combineByKey"><span class="nav-number">2.1.</span> <span class="nav-text">combineByKey()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flatMapValues"><span class="nav-number">2.2.</span> <span class="nav-text">flatMapValues()</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
